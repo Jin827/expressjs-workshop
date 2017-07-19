@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+  div#posts
+      h1 List of posts
+      ul.posts-list
+        each post in posts
+          li.post-item
+            h2.post-item__title
+              a(href=post.url) #{post.title}
+            p Created by #{post.user.username} and #{post.user.Id}

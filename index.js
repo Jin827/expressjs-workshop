@@ -88,8 +88,7 @@ var response = {
 // });
 
 
-// retrieves the contents of the posts table of reddit database 
-// using the getAllPosts function
+// retrieves the contents of the posts table of DB
 app.get('/posts', (req, res) => {
   myReddit.getAllPosts()
   .then(result => {
@@ -100,27 +99,29 @@ app.get('/posts', (req, res) => {
 
 
 
-app.get('/new-post', (req, res) => {
-  res.send(
-  `<form action="/createPost" method="POST">
-  <p>
-    <input type="text" name="url" placeholder="Enter a URL to content">
-  </p>
-  <p>
-    <input type="text" name="title" placeholder="Enter the title of your content">
-  </p>
-  <button type="submit">Create!</button>
-</form>`)
-});
-
 // app.get('/new-post', (req, res) => {
-//   res.render('new-post-form')
-// })
+//   res.send(
+//   `<form action="/createPost" method="POST">
+//   <p>
+//     <input type="text" name="url" placeholder="Enter a URL to content">
+//   </p>
+//   <p>
+//     <input type="text" name="title" placeholder="Enter the title of your content">
+//   </p>
+//   <button type="submit">Create!</button>
+// </form>`)
+// });
 
 
+// submit form
+app.get('/new-post', (req, res) => {
+  res.render('create-post')
+})
 
+
+// once user passes submit button, catch the input and throw it to server to create a new post
 app.post('/creatPost', bodyParser.urlencoded({extended:false}), function (req,res){ 
-    console.log(req.body);
+    if(!req.body){ return res.status(400) }
     
     myReddit.createPost({
       userId : 1,
@@ -129,14 +130,11 @@ app.post('/creatPost', bodyParser.urlencoded({extended:false}), function (req,re
       subredditId : 1
     });
     
-  res.redirect("/posts")
+  res.redirect("http://reddit-jin827.c9users.io/posts")
 })
 
 
 
-app.get('/createContent', (req, res) => {
-  res.render('create-content');
-})
 
 
 
