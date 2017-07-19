@@ -9,6 +9,10 @@
   "author": "DecodeMTL <hello@decodemtl.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.3"
+    "body": "^5.1.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.13.3",
+    "parser": "^0.1.4",
+    "pug": "^2.0.0-rc.2"
   }
 }
